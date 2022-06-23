@@ -28,7 +28,7 @@ Thiết bị
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="inputEmail4" class="form-label">Trạng thái kết nối</label>
                             <button style="text-align: left;padding: 3px;" class="form-control  dropdown-toggle"
@@ -52,16 +52,17 @@ Thiết bị
                             </form>
                         </div>
                     </div>
-                    <div class=" row add-device">
-                        <a href="/them-thiet-bi">
-                            <img src="/images/Component 1.png" alt="">
-                        </a>
-                    </div>
+                </div>
+            </div>
+                <div class=" row add-device">
+                    <a href="/them-thiet-bi">
+                        <img src="/images/Component 1.png" alt="">
+                    </a>
                 </div>
                     <div class="col-md-12">
                         <div class="table100 ver1 m-b-110">
                             <div class="table100-body js-pscroll ps ">
-                                <table id="table_id">
+                                <table>
                                     <thead>
                                         <tr class="">
                                             <th class="text-center">Mã thiết bị</th>
