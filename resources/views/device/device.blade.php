@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('components.layout')
 @section('title')
 Thiết bị
 @endsection

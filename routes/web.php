@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Route::get('/', function(){
-//     return view();
+Route::get('/', function(){
+    return view('welcome');
+});
 // account
 // Route::view('/login','account.account.login');
 // Route::get('/account', [App\Http\Controllers\accountController::class, 'index'])->name('');
 // Route::get('/add-account', [App\Http\Controllers\accountController::class, 'create'])->name('acount.add');
 // Route::post('/save-account', [App\Http\Controllers\accountController::class, 'save'])->name('account.save');
 // Route::get('/edit-account/{id}', [App\Http\Controllers\accountController::class, 'edit'])->name('');
+Route::group(['prefix' => 'admin','middleware'=>['checkAdmin','auth']], function () {
 // thiết bị
 Route::get('/thiet-bi', [App\Http\Controllers\DeviceController::class, 'index'])->name('device');
 Route::get('/them-thiet-bi', [App\Http\Controllers\DeviceController::class, 'create'])->name('device.add');
@@ -43,3 +46,14 @@ Route::get('/service-shut-dow', [App\Http\Controllers\ServiceController::class, 
 Route::get('/service-detail/{id}', [App\Http\Controllers\ServiceController::class, 'service_detail'])->name('service.detail');
 Route::get('/edit-service/{id}', [App\Http\Controllers\ServiceController::class, 'edit_service'])->name('service.edit');
 Route::post('/update-service/{id}', [App\Http\Controllers\ServiceController::class, 'update_service'])->name('service.update');
+// Account
+Route::get('/account', [App\Http\Controllers\accountController::class, 'index'])->name('');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

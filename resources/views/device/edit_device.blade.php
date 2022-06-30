@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('components.layout')
 @section('title')
 Chỉnh sửa thiết bị
 @endsection
@@ -92,7 +92,7 @@ Chỉnh sửa thiết bị
                 <span>Xin chào</span>
               </div>
               <div class="admin_name col-md-12">
-                <span>Nguyễn Trường Vi</span>
+                <span>Võ Thị Ánh Nguyệt </span>
               </div>
             </div>
           </div>
