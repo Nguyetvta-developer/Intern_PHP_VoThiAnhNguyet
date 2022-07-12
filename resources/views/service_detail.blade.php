@@ -1,4 +1,4 @@
-@extends('components.layout')
+@extends('layouts.app')
 @section('title')
 Chi tiết dịch vụ
 @endsection
@@ -74,15 +74,42 @@ Chi tiết dịch vụ
     </ul>
 </div>
 <section class="home-section">
-    @include('components.nav')
+    <nav>
+        <div class="sidebar-button">
+            <span class="text-secondary">Dịch vụ</span> <i class='bx bx-chevron-right text-secondary'></i><span
+                class="dashboard text-secondary">Danh sách dịch vụ</span><i
+                class='bx bx-chevron-right text-secondary'></i><span class="dashboard">Chi tiết dịch vụ</span>
+        </div>
+        <div class="profile-details d-flex justify-content-end align-items-center">
+            <div class="container d-flex justify-content-end align-items-center">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="/images/avt.jpg" alt="">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="admin_hello col-md-12">
+                                <span>Xin chào</span>
+                            </div>
+                            <div class="admin_name col-md-12">
+                                <span>Võ Thị Ánh Nguyệt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="home-content" id="device">
         <h3 class="text-primary" style="margin-left: 30px;font-size: 24px;margin-bottom: 20px;">Quản lý dịch vụ
         </h3>
+
+
         <div class="row" style="margin-left: 15px;">
             <div class="box-detail col-md-3">
                 <div class="col-md-12" style="    margin-left: -30px;
         ">
-                    <h5 class="text-primary" style="padding: 5px;">Thông tin dịch vụ</h5>
+                    <h5 class="text-primary" style="padding: 15px;">Thông tin dịch vụ</h5>
                     <div class="row detail">
                         <div class="col-md-6">
                             <table>
@@ -100,10 +127,10 @@ Chi tiết dịch vụ
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <table class="text-left">
                                 <tr>
-                                    <th class="col-md-2">{{$data->service_code}}</th>
+                                    <th class="">{{$data->service_code}}</th>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -124,10 +151,10 @@ Chi tiết dịch vụ
                     <h5 class="text-primary" style="padding: 15px;">Quy tắc cấp số</h5>
                     <div class="row detail">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-service service-item-detail">Tăng từ
-                                <input name="service_min" value="{{$data->service_min}}"
+                            <li class="list-group-item list-group-item-service service-item-detail">Tăng tự động từ:
+                                <input name="service_min" value="000{{$data->service_min}}"
                                     class="form-control form-control-service1" type="text"> <span
-                                    style="margin-left: 85px;"></span> <input name="service_max"
+                                    style="margin-left: 70px;">đến</span> <input name="service_max"
                                     value="{{$data->service_max}}" class="form-control form-control-service2"
                                     type="text"></li>
                             <li class="list-group-item list-group-item-service service-item-detail">Prefix: <input
@@ -145,9 +172,9 @@ Chi tiết dịch vụ
             <div class="box-detail col-md-7">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="inputEmail4" class="form-label">Trạng thái hoạt động</label>
+                                <label for="inputEmail4" class="form-label">Trạng thái HĐ</label>
                                 <button style="text-align: left;padding: 3px;" class="form-control  dropdown-toggle"
                                     type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -178,23 +205,24 @@ Chi tiết dịch vụ
                             </div>
                         </div>
 
-                        <div class="col-md-2 search">
+                        <div class="col-md-3 search">
                             <div class="form-group">
                                 <form action="" method="get">
                                     @csrf
                                     <label for="inputEmail4" class="form-label">Từ khóa</label>
                                     <input style="border: 1px solid #ced4da !important;" type="text" name="key"
-                                        class="form-control" placeholder="Nhập">
-                                    <button type="submit" name="submit"><i style="top: 40px;left: 145px;" class='bx bx-search'></i></button>
+                                        class="form-control" placeholder="Nhập từ khóa">
+                                    <button type="submit" name="submit"><i style="    top: 40px;
+                            left: 145px;" class='bx bx-search'></i></button>
                                 </form>
                             </div>
                         </div>
-                        {{-- <div style="margin-top: 100px; margin-right: 140px; width:40px" class="add-service">
+                        <div class="add-service">
                             <a href="/them-dich-vu">
                                 <img src="/images/Component 3.png" alt="">
                             </a>
-                        </div> --}}
-                        <div style="margin-right: 130px; width: 40px" class="back-device">
+                        </div>
+                        <div class="back-device">
                             <a href="/dich-vu">
                                 <img src="/images/Frame 111.png" alt="">
                             </a>

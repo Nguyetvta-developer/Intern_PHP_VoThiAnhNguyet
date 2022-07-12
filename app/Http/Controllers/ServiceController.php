@@ -7,10 +7,10 @@ use App\models\service;
 use Illuminate\Support\Facades\DB;
 class ServiceController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         if($key = request()->key){
             $data=DB::table('service')
@@ -18,10 +18,10 @@ class ServiceController extends Controller
             ->where('service_name','like','%'.$key.'%')
             ->paginate(7);
         }else{$data= service::paginate(7);}
-        return view('service.service',compact('data'));
+        return view('service',compact('data'));
     }
     public function create(){
-        return view('service.add_service');
+        return view('add_service');
     }
     public function save (Request $request){
         service::create([
@@ -38,19 +38,19 @@ class ServiceController extends Controller
     }
     public function service_active(){
         $data = service::where('service_status',1)->paginate(7);
-        return view('service.service',compact('data'));
+        return view('service',compact('data'));
     }
     public function service_shut_dow(){
         $data = service::where('service_status',0)->paginate(7);
-        return view('service.service',compact('data'));
+        return view('service',compact('data'));
     }
     public function service_detail($id){
         $data = DB::table('service')->where('id', $id)->first();
-        return view('service.service_detail',compact('data'));
+        return view('service_detail',compact('data'));
     }
     public function edit_service($id){
         $data = DB::table('service')->where('id', $id)->first();
-        return view('service.edit_service',compact('data'));
+        return view('edit_service',compact('data'));
     }
     public function update_service(Request $request, $id){
         $update = service::find($id);

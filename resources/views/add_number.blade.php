@@ -1,13 +1,15 @@
 @extends('layouts.app')
-
+@section('title')
+Cấp số mới
+@endsection
 @section('content')
 <div class="sidebar">
     <div class="logo-details d-flex justify-content-center align-items-center">
         <span class="logo_name"><img src="images/Logoalta.png" alt=""></span>
     </div>
     <ul class="nav-links">
-        <li class="active" >
-            <a href="/" class="text-primary">
+        <li>
+            <a href="/">
                 <i class='bx bxs-dashboard'></i>
                 <span class="links_name">Dashboard</span>
             </a>
@@ -24,21 +26,18 @@
                 <span class="links_name">Dịch vụ</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="/number" class="">
                 <i class='bx bx-layer'></i>
                 <span class="links_name">Cấp số</span>
             </a>
         </li>
         <li>
-            <a href="#" class="">
+            <a href="/report" class="">
                 <i class='bx bx-trending-up'></i>
                 <span class="links_name">Báo cáo</span>
             </a>
         </li>
-
-
-
         <li>
             <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class='bx bx-cog'></i>
@@ -77,10 +76,10 @@
 <section class="home-section">
     <nav>
         <div class="sidebar-button">
-
-            <span class="dashboard">Thông tin cá nhân</span>
+            <span class="text-secondary">Thiết bị</span> <i class='bx bx-chevron-right text-secondary'></i><span
+                class="dashboard text-secondary">Danh sách cấp số</span><i
+                class='bx bx-chevron-right text-secondary'></i><span class="dashboard">Cấp số</span>
         </div>
-
         <div class="profile-details d-flex justify-content-end align-items-center">
             <div class="container d-flex justify-content-end align-items-center">
                 <div class="row">
@@ -93,33 +92,84 @@
                                 <span>Xin chào</span>
                             </div>
                             <div class="admin_name col-md-12">
-                                <span> {{ Auth::user()->name }}</span>
+                                <span>Võ Thị Ánh Nguyệt</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </nav>
+    <div class="home-content" id="device">
+        <h3 class="text-primary" style="margin-left: 30px;font-size: 24px;margin-top: 25px;">Quản lý dịch vụ</h3>
+        <div class="form-box number" style="min-height: 604px;margin-top: 28px;">
+            <div class="col-md-12">
+                <div class="form">
+                    <div class="row d-flex justify-content-center">
+                        <h1 class="title col-md-12 text-center">CẤP SỐ MỚI</h1>
+                        <span class="col-md-12 text-center">Dịch vụ khách hàng lựa chọn</span>
+                        <form  class="content col-md-12 text-center">
+                            <input type="hidden" value="{{ Auth::user()->name }}" id="number_name" name="number_name">
 
-    <div class="home-content infor">
-        <div class="container cart-box">
-            Xin chào {{ Auth::user()->name }}
+                            <select class="form-control" name="number_sevice" id="number_sevice">
+                                @foreach($service as $item)
+                                <option value="{{$item->service_name}}">{{$item->service_name}}</option>
+                                @endforeach
+                            </select>
+                            <div class="col-md-12 d-flex justify-content-center align-items-center" style="position: absolute;
+                                top: 225px;">
+                                <a href="/number" class="btn-huy btn-add-device">
+                                    Hủy bỏ
+                                </a>
+                                <button onclick="add_number()" type="button"
+                                    class="btn-add btn-add-device  btn btn-primary" data-toggle="modal"
+                                    data-target="#small-modal">In số</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
+<div class="col-md-4 col-sm-12 mb-30">
+    <div class="pd-20 card-box height-100-p">
+        <div class="modal fade" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content" id="showmodal">
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    function add_number() {
+        let number_name = $("#number_name").val();
+        let number_sevice = $("#number_sevice").val();
+        $.ajax({
+            url: {{ '/save-number/'}} +number_name + '/' + number_sevice,
+            type: 'get',		
+		}).done(function (response) {
+
+        $("#showmodal").empty();
+        $("#showmodal").html(response);
+                });
+     }
+</script>
+<!-- <script>
     let sidebar = document.querySelector(".sidebar");
     let sidebarBtn = document.querySelector(".sidebarBtn");
     sidebarBtn.onclick = function () {
-        sidebar.classList.toggle("active");
-        if (sidebar.classList.contains("active")) {
-            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-        } else
-            sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else
+        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
     }
-</script>
+  </script> -->
+
 @endsection

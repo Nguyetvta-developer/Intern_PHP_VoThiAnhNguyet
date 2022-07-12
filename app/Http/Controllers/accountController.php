@@ -14,7 +14,7 @@ class accountController extends Controller
     ->join('role','users.account_role','=','role.id')
     ->select('users.*','role.role_name','role.id')
     ->paginate(8);
-       return view('account.account',compact('data'));
+       return view('account',compact('data'));
    }
    public function create(){
        $role=role::all();

@@ -1,11 +1,11 @@
-@extends('components.layout')
+@extends('layouts.app')
 @section('title')
-Chỉnh sửa thiết bị
+Thêm thiết bị
 @endsection
 @section('content')
 <div class="sidebar">
   <div class="logo-details d-flex justify-content-center align-items-center">
-    <span class="logo_name"><img src="/images/Logoalta.png" alt=""></span>
+    <span class="logo_name"><img src="images/Logoalta.png" alt=""></span>
   </div>
   <ul class="nav-links">
             <li>
@@ -15,9 +15,9 @@ Chỉnh sửa thiết bị
                 </a>
             </li>
             <li class="active">
-                <a href="/thiet-bi" >
+                <a href="/thiet-bi" class="">
                     <i class='bx bx-laptop'></i>
-                    <span class="links_nameative">Thiết bị</span>
+                    <span class="links_name">Thiết bị</span>
                 </a>
             </li>
             <li>
@@ -84,7 +84,7 @@ Chỉnh sửa thiết bị
       <div class="container d-flex justify-content-end align-items-center">
         <div class="row">
           <div class="col-md-2">
-            <img src="/images/avt.jpg" alt="">
+            <img src="images/avt.jpg" alt="">
           </div>
           <div class="col-md-9">
             <div class="row">
@@ -92,7 +92,7 @@ Chỉnh sửa thiết bị
                 <span>Xin chào</span>
               </div>
               <div class="admin_name col-md-12">
-                <span>Võ Thị Ánh Nguyệt </span>
+                <span>Võ Thị Ánh Nguyệt</span>
               </div>
             </div>
           </div>
@@ -102,24 +102,24 @@ Chỉnh sửa thiết bị
   </nav>
   <div class="home-content" id="device">
     <h3 class="text-primary" style="margin-left: 30px;font-size: 24px;margin-bottom: 15px;">Quản lý thiết bị</h3>
-    <form action="/cap-nhat/{{$device->id}}" method="post">
+    <form action="/luu-thiet-bi" method="post">
       <div class="form-box">
         <div class="col-md-12">
           <h5 class="text-primary">Thông tin thiết bị</h5>
           <div class="row" style="padding: 5px;">
             <div class="col-md-12">
+
               @csrf
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="exampleInputEmail1">Mã thiết bị: <span class="text-danger">*</span> </label>
-                  <input name="device_code" type="text" value="{{$device->device_code}}" class="form-control" placeholder="Nhập mã thiết bị">
+                  <input name="device_code" type="text" class="form-control" placeholder="Nhập mã thiết bị">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleInputPassword1">Loại thiết bị: <span class="text-danger">*</span></label>
-                  <input name="" type="text"  placeholder="Nhập loại thiết bị">
                   <select name="device_category" id="" class="form-control">
-                    @foreach($category as $item)
-                    <option value="{{$item->id}}"{{($item->id==$device->device_category)?'selected':''}}>{{$item->category_name}}</option>
+                    @foreach($data as $item)
+                    <option value="{{$item->id}}">{{$item->category_name}}</option>
                     @endforeach
                   </select>
                 </div>
@@ -127,27 +127,27 @@ Chỉnh sửa thiết bị
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="exampleInputEmail1">Tên thiết bị: <span class="text-danger">*</span> </label>
-                  <input name="device_name" type="text" value="{{$device->device_name}}" class="form-control" placeholder="Nhập tên thiết bị">
+                  <input name="device_name" type="text" class="form-control" placeholder="Nhập tên thiết bị">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleInputPassword1">Tên đăng nhập: <span class="text-danger">*</span></label>
-                  <input name="device_username" type="text" value="{{$device->device_username}}" class="form-control" placeholder="Nhập tên đăng nhập">
+                  <input name="device_username" type="text" class="form-control" placeholder="Nhập tên đăng nhập">
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="exampleInputEmail1">Địa chỉ IP: <span class="text-danger">*</span> </label>
-                  <input name="device_id" type="text" class="form-control" value="{{$device->device_id}}" placeholder="Nhập địa chỉ IP" autocomplete="off">
+                  <input name="device_id" type="text" class="form-control" placeholder="Nhập địa chỉ IP" autocomplete="off">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleInputPassword1">Mật khẩu: <span class="text-danger">*</span></label>
-                  <input name="device_password" type="password" value="{{$device->device_password}}" class="form-control" placeholder="Nhập mật khẩu" autocomplete="off">
+                  <input name="device_password" type="password" class="form-control" placeholder="Nhập mật khẩu" autocomplete="off">
                 </div>
                 <div class="form-group col-md-12" style="border: none;">
                   <label for="exampleInputPassword1">Dịch vụ sử dụng: <span class="text-danger">*</span></label>
                   <div class="mb-30 ">
-                    <input name="device_title" value="{{$device->device_title}}" type="text" class="" data-role="tagsinput" placeholder="Nhập dịch vụ sử dụng">
+                    <input name="device_title" type="text" value="" class="" data-role="tagsinput" placeholder="Nhập dịch vụ sử dụng">
                   </div>
                 </div>
                 <div><span class="text-danger">*</span> Là thông tin trường băt </div>

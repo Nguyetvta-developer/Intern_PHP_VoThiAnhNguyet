@@ -19,6 +19,10 @@ class service extends Model
         'service_min',
         'service_max',    
         'service_Prefix', 
-        'service_Surfix',  
+        'service_Surfix', 
+        
+
+        
+       
     ];
 }

@@ -7,8 +7,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class RedirectIfAuthenticated
 {
     /**
@@ -24,13 +22,8 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            // if (Auth::guard($guard)->check()) {
-            //     return redirect(RouteServiceProvider::HOME);
-            // }
-            if(Auth::guard($guard)->check() && Auth::user()->account_role == 1){
-                return redirect()->route('admin');
-            }elseif (Auth::guard($guard)->check() && Auth::user()->account_role == 0) {
-                return redirect()->route('home');
+            if (Auth::guard($guard)->check()) {
+                return redirect(RouteServiceProvider::HOME);
             }
         }
 

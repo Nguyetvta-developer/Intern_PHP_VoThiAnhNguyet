@@ -1,4 +1,4 @@
-@extends('components.layout')
+@extends('layouts.app')
 @section('title')
 Dịch vụ
 @endsection
@@ -77,13 +77,38 @@ Dịch vụ
     </ul>
 </div>
 <section class="home-section">
-    @include('components.nav')
+    <nav>
+        <div class="sidebar-button">
+            <span class="text-secondary">Dịch vụ</span> <i class='bx bx-chevron-right text-secondary'></i><span
+                class="dashboard">Danh sách dịch vụ</span>
+        </div>
+
+        <div class="profile-details d-flex justify-content-end align-items-center">
+            <div class="container d-flex justify-content-end align-items-center">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="images/avt.jpg" alt="">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="admin_hello col-md-12">
+                                <span>Xin chào</span>
+                            </div>
+                            <div class="admin_name col-md-12">
+                                <span>Võ Thị Ánh Nguyệt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="home-content" id="device">
         <div class="device">
             <div class="col-md-12 ">
                 <h3 class="text-primary" style="margin-bottom: 30px;">Quản lý dịch vụ</h3>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3" style="margin-right: 15px">
                         <div class="form-group">
                             <label for="inputEmail4" class="form-label">Trạng thái hoạt động</label>
                             <button style="text-align: left;padding: 3px;" class="form-control  dropdown-toggle"
@@ -97,7 +122,7 @@ Dịch vụ
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="row">
                             <label for="inputEmail4" class="form-label col-md-12">Chọn thời gian</label>
                             <div class="col-md-6">
@@ -112,7 +137,7 @@ Dịch vụ
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 search" >
+                    <div class="col-md-3 search" style="margin-left: 111px;">
                         <div class="form-group">
                             <form action="" method="get">
                                 @csrf
@@ -122,18 +147,16 @@ Dịch vụ
                             </form>
                         </div>
                     </div>
-                </div>
-                <div style="margin-left: 150px" class="add-device">
-                    <a href="/them-dich-vu">
-                        <img src="/images/Component 3.png" alt="">
-                    </a>
-                </div>
-            </div>
+                    <div class="add-device">
+                        <a href="/them-dich-vu">
+                            <img src="/images/Component 3.png" alt="">
+                        </a>
+                    </div>
 
                     <div class="col-md-12">
                         <div class="table100 ver1 m-b-110">
                             <div class="table100-body js-pscroll ps ">
-                                <table >
+                                <table id="table_id">
                                     <thead>
                                         <tr class="">
                                             <th class="text-center">Mã dịch vụ</th>

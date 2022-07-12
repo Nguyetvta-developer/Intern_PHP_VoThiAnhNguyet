@@ -1,11 +1,11 @@
-@extends('components.layout')
+@extends('layouts.app')
 @section('title')
-Chỉnh sủa tài khoản
+Thêm thiết bị
 @endsection
 @section('content')
 <div class="sidebar">
     <div class="logo-details d-flex justify-content-center align-items-center">
-        <span class="logo_name"><img src="/images/Logoalta.png" alt=""></span>
+        <span class="logo_name"><img src="images/Logoalta.png" alt=""></span>
     </div>
     <ul class="nav-links">
         <li>
@@ -38,7 +38,7 @@ Chỉnh sủa tài khoản
                 <span class="links_name">Báo cáo</span>
             </a>
         </li>
-        <li class="active">
+        <li>
             <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class='bx bx-cog'></i>
                 <span class="links_name">Cài đặt hệ thống <i class='bx bx-dots-vertical-rounded'></i>
@@ -78,7 +78,7 @@ Chỉnh sủa tài khoản
         <div class="sidebar-button">
             <span class="text-secondary">Tài khoản</span> <i class='bx bx-chevron-right text-secondary'></i><span
                 class="dashboard text-secondary">Danh sách tài khoản</span><i
-                class='bx bx-chevron-right text-secondary'></i><span class="dashboard">Chỉnh sửa</span>
+                class='bx bx-chevron-right text-secondary'></i><span class="dashboard">Thêm tài khoản</span>
         </div>
         <div class="profile-details d-flex justify-content-end align-items-center">
             <div class="container d-flex justify-content-end align-items-center">
@@ -92,7 +92,7 @@ Chỉnh sủa tài khoản
                                 <span>Xin chào</span>
                             </div>
                             <div class="admin_name col-md-12">
-                                <span>Nguyễn Trường Vi</span>
+                                <span>Võ Thị Ánh Nguyệt</span>
                             </div>
                         </div>
                     </div>
@@ -103,12 +103,12 @@ Chỉnh sủa tài khoản
     <div class="home-content" id="device">
         <h3 class="text-primary" style="margin-left: 30px;font-size: 24px;margin-bottom: 15px;">Quản lý tài khoản
         </h3>
-        <form action="/luu-thiet-bi" method="post" id="formclear">
+        <form action="/save-account" method="post">
             <div class="form-box">
                 <div class="col-md-12">
                     <h5 class="text-primary">Thông tin tài khoản</h5>
                     <div class="row" style="padding: 5px;">
-                    <div class="col-md-12">
+                        <div class="col-md-12">
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -123,13 +123,13 @@ Chỉnh sủa tài khoản
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Họ tên: <span class="text-danger">*</span>
                                     </label>
-                                    <input id="name" value="{{ $data->name }}" name="name" type="text" class="form-control"
+                                    <input value="{{ old('name') }}" name="name" type="text" class="form-control"
                                         placeholder="Nhập họ và tên">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Tên đăng nhập: <span class="text-danger">*</span>
                                     </label>
-                                    <input value="{{ $data->account_username }}" name="account_username" type="text"
+                                    <input value="{{ old('account_username') }}" name="account_username" type="text"
                                         class="form-control" placeholder="Nhập tên đăng nhập">
                                 </div>
                             </div>
@@ -137,13 +137,13 @@ Chỉnh sủa tài khoản
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Số điện thoại: <span class="text-danger">*</span>
                                     </label>
-                                    <input value="{{ $data->account_number }}" name="account_number" type="text"
+                                    <input value="{{ old('account_number') }}" name="account_number" type="text"
                                         class="form-control" placeholder="Nhập số điện thoại">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputPassword1">Mật khẩu: <span
                                             class="text-danger">*</span></label>
-                                    <input value="" name="password" type="password" class="form-control"
+                                    <input name="password" type="password" class="form-control"
                                         placeholder="Nhập mật khẩu">
                                 </div>
                             </div>
@@ -151,13 +151,13 @@ Chỉnh sủa tài khoản
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputEmail1">Email: <span class="text-danger">*</span>
                                     </label>
-                                    <input value="{{$data->email}}" name="email" type="text" class="form-control"
+                                    <input value="{{ old('email') }}" name="email" type="text" class="form-control"
                                         placeholder="Nhập Email">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="exampleInputPassword1">Nhập lại mật khẩu: <span
                                             class="text-danger">*</span></label>
-                                    <input value="" name="password_confirmation" type="password" class="form-control"
+                                    <input name="password_confirmation" type="password" class="form-control"
                                         placeholder="Nhập lại mật khẩu">
                                 </div>
                             </div>
@@ -167,7 +167,7 @@ Chỉnh sủa tài khoản
                                     </label>
                                     <select name="account_role" class="form-control" id="">
                                         @foreach($role as $item)
-                                        <option  value="{{$item->id}}" {{($data->account_role==$item->id)?'selected':''}} >{{$item->role_name}}</option>
+                                        <option value="{{$item->id}}">{{$item->role_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -175,8 +175,8 @@ Chỉnh sủa tài khoản
                                     <label for="exampleInputPassword1">Tình trạng: <span
                                             class="text-danger">*</span></label>
                                     <select name="account_status" class="form-control" id="">
-                                        <option value="1" {{($data->account_status==1)?'selected':''}} >Hoạt động</option>
-                                        <option value="2" {{($data->account_status==2)?'selected':''}} >Ngưng hoạt động</option>
+                                        <option value="1">Hoạt động</option>
+                                        <option value="2">Ngưng hoạt động</option>
                                     </select>
                                 </div>
                                 <div>
@@ -189,17 +189,13 @@ Chỉnh sủa tài khoản
                 </div>
             </div>
             <div class="col-md-12 d-flex justify-content-center align-items-center">
-                <button onclick="newFunction()" type="button" class="btn-huy btn-add-device  ">Hủy bỏ</button>
+                <button class="btn-huy btn-add-device  ">Hủy bỏ</button>
                 <button class="btn-add btn-add-device  btn btn-primary">Thêm</button>
             </div>
         </form>
     </div>
 </section>
-<script type="text/javascript">
-    function newFunction(){
-        document.getElementById("formclear").reset();
-    }
-</script>
+
 <!-- <script>
     let sidebar = document.querySelector(".sidebar");
     let sidebarBtn = document.querySelector(".sidebarBtn");

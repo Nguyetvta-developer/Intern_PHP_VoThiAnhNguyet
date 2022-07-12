@@ -1,17 +1,111 @@
-@extends('components.layout')
+@extends('layouts.app')
 @section('title')
 Thiết bị
 @endsection
 @section('content')
-@include('components.sidebar')
+<div class="sidebar">
+    <div class="logo-details d-flex justify-content-center align-items-center">
+        <span class="logo_name"><img src="images/Logoalta.png" alt=""></span>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">
+                <i class='bx bxs-dashboard'></i>
+                <span class="links_name">Dashboard</span>
+            </a>
+        </li>
+        <li class="active">
+            <a href="/thiet-bi">
+                <i class='bx bx-laptop'></i>
+                <span class="links_name">Thiết bị</span>
+            </a>
+        </li>
+        <li>
+            <a href="/dich-vu" class="">
+                <i class='bx bx-conversation'></i>
+                <span class="links_name">Dịch vụ</span>
+            </a>
+        </li>
+        <li>
+            <a href="/number" class="">
+                <i class='bx bx-layer'></i>
+                <span class="links_name">Cấp số</span>
+            </a>
+        </li>
+        <li>
+            <a href="/report" class="">
+                <i class='bx bx-trending-up'></i>
+                <span class="links_name">Báo cáo</span>
+            </a>
+        </li>
+        <li>
+            <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class='bx bx-cog'></i>
+                <span class="links_name">Cài đặt hệ thống  <i class='bx bx-dots-vertical-rounded'></i>
+                </span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="/role">Quản lý vai trò</a></li>
+                <li><a class="dropdown-item" href="/account">Quản lý tài khoản</a></li>
+                <li><a class="dropdown-item" href="#">Nhật người dùng</a></li>
+            </ul>
+        </li>
+        @guest
+        @if (Route::has('login'))
+
+        @endif
+
+        @if (Route::has('register'))
+
+        @endif
+        @else
+        <li class="log_out">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <i class='bx bx-log-in'></i>
+                <span class="links_name">Đăng xuất</span>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+
+        </li>
+        @endguest
+    </ul>
+</div>
 <section class="home-section">
-    @include('components.nav')
+    <nav>
+        <div class="sidebar-button">
+            <span class="text-secondary">Thiết bị</span> <i class='bx bx-chevron-right text-secondary'></i><span
+                class="dashboard">Danh sách thiết bị</span>
+        </div>
+
+        <div class="profile-details d-flex justify-content-end align-items-center">
+            <div class="container d-flex justify-content-end align-items-center">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="images/avt.jpg" alt="">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="admin_hello col-md-12">
+                                <span>Xin chào</span>
+                            </div>
+                            <div class="admin_name col-md-12">
+                                <span>Võ Thị Ánh Nguyệt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="home-content" id="device">
         <div class="device">
             <div class="col-md-12 ">
                 <h3 class="text-primary" style="margin-bottom: 30px;">Danh sách thiết bị</h3>
-                <div class="row d-flex flex-row justify-content-around ">
-                    <div class="col-md-4">
+                <div class="row">
+                    <div style="margin-right: 30px" class="col-md-3">
                         <div class="form-group">
                             <label for="inputEmail4" class="form-label">Trạng thái hoạt động</label>
                             <div class="dropdown">
@@ -28,7 +122,7 @@ Thiết bị
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" style="margin-right: 50px">
                         <div class="form-group">
                             <label for="inputEmail4" class="form-label">Trạng thái kết nối</label>
                             <button style="text-align: left;padding: 3px;" class="form-control  dropdown-toggle"
@@ -42,7 +136,7 @@ Thiết bị
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4 search" >
+                    <div class="col-md-3 search" >
                         <div class="form-group">
                             <form action="" method="get">
                                 @csrf
@@ -52,17 +146,16 @@ Thiết bị
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-                <div class=" row add-device">
-                    <a href="/them-thiet-bi">
-                        <img src="/images/Component 1.png" alt="">
-                    </a>
-                </div>
+                    <div class="add-device">
+                        <a href="/them-thiet-bi">
+                            <img src="/images/Component 1.png" alt="">
+                        </a>
+                    </div>
+
                     <div class="col-md-12">
                         <div class="table100 ver1 m-b-110">
                             <div class="table100-body js-pscroll ps ">
-                                <table>
+                                <table id="table_id">
                                     <thead>
                                         <tr class="">
                                             <th class="text-center">Mã thiết bị</th>
@@ -109,6 +202,7 @@ Thiết bị
                             </div>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>
